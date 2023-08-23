@@ -8,6 +8,8 @@ import lombok.*;
 public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column()
     private Long id;
     private String name;
     private int rating;

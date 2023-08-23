@@ -1,10 +1,8 @@
 package com.example.iber.controller;
 import com.example.iber.model.Driver;
 import com.example.iber.service.DriverService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -27,5 +25,12 @@ public class DriverController {
     Optional<Driver> getDriver(@PathVariable Long id){
         return driverService.findDriverById(id);
     }
+
+    @DeleteMapping("/{id}")
+    String deleteDriver(@PathVariable Long id){
+        driverService.removeDriverById(id);
+        return "Driver was deleted successfully";
+    }
+
 }
 
