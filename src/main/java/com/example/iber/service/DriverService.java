@@ -20,4 +20,8 @@ public class DriverService {
     public Optional<Driver> findDriverById(Long id){
         return driverRepo.findById(id);
     }
+
+    public void removeDriverById(Long id){
+        driverRepo.deleteById(id);
+    }
 }
