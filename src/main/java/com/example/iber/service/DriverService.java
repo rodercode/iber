@@ -3,6 +3,8 @@ import com.example.iber.model.Driver;
 import com.example.iber.repo.DriverRepo;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class DriverService {
 
@@ -11,7 +13,11 @@ public class DriverService {
         this.driverRepo = driverRepo;
     }
 
-    public List<Driver> getAllDrivers(){
+    public List<Driver> findAllDrivers(){
         return driverRepo.findAll();
+    }
+
+    public Optional<Driver> findDriverById(Long id){
+        return driverRepo.findById(id);
     }
 }
