@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DriverService {
@@ -13,6 +14,10 @@ public class DriverService {
     private DriverRepo driverRepo;
 
     public List<Driver> getAllDrivers(){
-        return driverRepo.findAllDrivers();
+        return driverRepo.findAll();
+    }
+
+    public Optional<Driver> findDriverById(Long id){
+        return driverRepo.findById(id);
     }
 }
