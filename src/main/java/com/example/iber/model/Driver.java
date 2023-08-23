@@ -1,8 +1,12 @@
 package com.example.iber.model;
 import jakarta.persistence.*;
-
+import lombok.*;
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Driver {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,5 +18,4 @@ public class Driver {
     private String location;
     @Column(name = "passengerCapacity")
     private int passengerCapacity;
-    // Constructors, getters, setters, etc.
 }
