@@ -8,5 +8,5 @@ import java.util.List;
 @Repository
 public interface DriverRepo extends JpaRepository<Driver,Long> {
     List<Driver> findAll();
-    
+
 }
