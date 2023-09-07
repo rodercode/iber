@@ -4,7 +4,8 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-
+@Builder
+@AllArgsConstructor
 @Entity(name = "driver")
 public class Driver {
     @Id
