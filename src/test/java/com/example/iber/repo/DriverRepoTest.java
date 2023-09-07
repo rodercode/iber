@@ -153,4 +153,48 @@ class DriverRepoTest {
         // Assert
         fetchedDriver.ifPresent(driver -> assertThat(driver.getCar()).isEqualTo("Tesla"));
     }
+
+////////////////////////////////////////////////////
+// TESTING FETCH DRIVER BY Car
+///////////////////////////////////////////////////
+
+     /*
+    method being tested: driverRepo.findByCar()
+    Description: is custom query method that should find a driver by car model
+
+    requirements:
+        1. Should fetch driver by car
+        2. Should return a driver object
+        3. Should not be an empty object
+    */
+
+    @Test
+    public void Should_NotReturnEmpty_When_FetchingDriverByCar(){
+        // Arrange
+        driverRepo.save(driverOne);
+        driverRepo.save(driverTwo);
+
+        // Act
+        Optional<Driver> fetchedDriver = driverRepo.findByCar("Tesla");
+
+        // Assert
+        assertThat(fetchedDriver).isNotEmpty();
+    }
+
+    @Test
+    public void Should_ReturnDriverOne_When_FetchingCarNameTesla(){
+        // Arrange
+        driverRepo.save(driverOne);
+        driverRepo.save(driverTwo);
+
+        // Act
+        Optional<Driver> fetchedDriver = driverRepo.findByCar("Tesla");
+
+        // Assert
+        fetchedDriver.ifPresent(driver -> assertThat(driver.getId()).isEqualTo(1L));
+    }
+
+
+
+
 }

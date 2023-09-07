@@ -8,5 +8,4 @@ import java.util.Optional;
 @Repository
 public interface DriverRepo extends JpaRepository<Driver,Long> {
     Optional<Driver> findByCar(String car);
-
 }
