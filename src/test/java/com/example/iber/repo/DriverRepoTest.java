@@ -59,6 +59,7 @@ class DriverRepoTest {
         3. driver's id should be greater than zero
     */
 
+
     @Test
     public void Should_NotReturnNull_When_DriverHasBeenSavedToDB(){
        // Act
@@ -90,6 +91,7 @@ class DriverRepoTest {
         3. driverList should not be empty
     */
 
+
     @Test
     public void driverListShouldNotBeNull_When_Fetched(){
         // Arrange
@@ -116,6 +118,7 @@ class DriverRepoTest {
         assertThat(driverList).size().isEqualTo(2);
     }
 
+
 ////////////////////////////////////////////////////
 // TESTING FETCH DRIVER BY ID
 ///////////////////////////////////////////////////
@@ -127,6 +130,7 @@ class DriverRepoTest {
         2. Should return a driver object
         3. Should not be an empty object
     */
+
 
     @Test
     public void Should_NotBeEmpty_When_FetchDriverByIdOne(){
@@ -154,6 +158,7 @@ class DriverRepoTest {
         fetchedDriver.ifPresent(driver -> assertThat(driver.getCar()).isEqualTo("Tesla"));
     }
 
+
 ////////////////////////////////////////////////////
 // TESTING FETCH DRIVER BY Car
 ///////////////////////////////////////////////////
@@ -167,6 +172,7 @@ class DriverRepoTest {
         2. Should return a driver object
         3. Should not be an empty object
     */
+
 
     @Test
     public void Should_NotReturnEmpty_When_FetchingDriverByCar(){
@@ -193,6 +199,38 @@ class DriverRepoTest {
         // Assert
         fetchedDriver.ifPresent(driver -> assertThat(driver.getId()).isEqualTo(1L));
     }
+
+
+////////////////////////////////////////////////////
+// TESTING FETCH DRIVER BY Car
+///////////////////////////////////////////////////
+
+     /*
+    method being tested: driverRepo.delete
+    Description: a method that delete a driver by enter its ID
+
+    requirements:
+        1. Should delete driver by id
+        2. Driver should not exist in the DB
+    */
+
+
+    @Test
+    public void Should_ReturnEmpty_When_FetchNonExistDriver(){
+        // Arrange
+        driverRepo.save(driverOne);
+        driverRepo.save(driverTwo);
+
+        // Act
+        long id = 1L;
+        driverRepo.deleteById(id);
+        Optional<Driver> fetchedDriver = driverRepo.findById(id);
+
+        // Assert
+        assertThat(fetchedDriver).isEmpty();
+    }
+
+
 
 
 
