@@ -1,22 +1,20 @@
 package com.example.iber.service;
 import com.example.iber.model.Driver;
 import com.example.iber.repo.DriverRepo;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import java.util.List;
+import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willReturn;
-import static org.mockito.Mockito.when;
 
 // Tell JUnit to use the Mockito extension
 @ExtendWith(MockitoExtension.class)
@@ -30,25 +28,33 @@ class DriverServiceUnitTest {
     @InjectMocks
     private DriverService driverService;
 
+    private Driver driverOne;
+    private Driver driverTwo;
 
-    // Data used for testing
-    Driver driverOne = Driver.builder()
-            .name("Johan Larsson")
-            .rating(5)
-            .car("Tesla")
-            .carLicense("345 sfr")
-            .location("Luleå City")
-            .passengerCapacity(4)
-            .build();
+    @BeforeEach
+    public void setup(){
+        // Data used for testing
+        driverOne = Driver.builder()
+                .name("Johan Larsson")
+                .rating(5)
+                .car("Tesla")
+                .carLicense("345 sfr")
+                .location("Luleå City")
+                .passengerCapacity(4)
+                .build();
 
-    Driver driverTwo = Driver.builder()
-            .name("Peter Kaffesoon")
-            .rating(3)
-            .car("Volvo")
-            .carLicense("357 sde")
-            .location("Piteå City")
-            .passengerCapacity(3)
-            .build();
+        driverTwo = Driver.builder()
+                .name("Peter Kaffesoon")
+                .rating(3)
+                .car("Volvo")
+                .carLicense("357 sde")
+                .location("Piteå City")
+                .passengerCapacity(3)
+                .build();
+    }
+
+
+
 
 
 ////////////////////////////////////////////////////
@@ -67,10 +73,8 @@ class DriverServiceUnitTest {
 
     @Test
     public void Should_ReturnDriver_When_CreateDriver(){
-        // Define the behaviour of save method
-        // it will check if the object passing in is matching Driver
-        // When passing any drive object to driverRepo.save -> return driver
 
+        // setup behaviour for save method in driverRepo mock object
         given(driverRepo.save(driverOne)).willReturn(driverOne);
 
         // test createDriver()
@@ -86,8 +90,6 @@ class DriverServiceUnitTest {
 
     /*
     method being tested: findAllDrivers
-    class being tested: driverService
-    mocked object: driverRepo
 
     requirements
         1. Should return drivers
@@ -95,7 +97,7 @@ class DriverServiceUnitTest {
     */
 
     @Test
-    public void Should_ReturnTwoDrivers_When_FetchAllDrivers(){
+    public void findAllDrivers_ShouldReturnListOfDrivers_WhenDriversExist(){
         // Arrange
         given(driverRepo.findAll()).willReturn(List.of(driverOne, driverTwo));
 
@@ -104,21 +106,35 @@ class DriverServiceUnitTest {
 
         // Assert
         assertThat(getDrivers).isNotNull();
-        assertThat(getDrivers.size()).isEqualTo(1);
+        assertThat(getDrivers.size()).isEqualTo(2);
     }
 
 ////////////////////////////////////////////////////
-// TESTING GET ALL DRIVERS
+// TESTING GET DRIVER BY ID
 ///////////////////////////////////////////////////
 
     /*
-    method being tested: findAllDrivers
-    class being tested: driverService
-    mocked object: driverRepo
+    method being tested: findDriverById
 
     requirements
-        1. Should return drivers
-        2. return value should not be null
+        1. Should return a driver when passing valid id
+        2. And if driver exist in the database
+        3. should not return null
     */
+
+    @Test
+    public void FindDriverById_ShouldReturnDriver_WhenDriverExist(){
+        // Arrange
+        given(driverRepo.findById(1L)).willReturn(Optional.of(driverOne));
+
+        // Act
+        Optional<Driver> fetchDriver = driverService.findDriverById(1L);
+
+        // Assert
+        assertThat(fetchDriver).isNotEmpty();
+    }
+
+
+
 
 }
