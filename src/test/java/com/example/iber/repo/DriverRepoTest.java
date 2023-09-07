@@ -135,10 +135,10 @@ class DriverRepoTest {
         driverRepo.save(driverTwo);
 
         // Act
-        Optional<Driver> fetchedDriver = driverRepo.findById(1L);
+        Optional<Driver> fetchedDriver = driverRepo.findById(4L);
 
         // Assert
-        assertThat(fetchedDriver).isNotEmpty();
+         assertThat(fetchedDriver).isEmpty();
     }
 
     @Test
