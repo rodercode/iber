@@ -1,15 +1,11 @@
 package com.example.iber.repo;
 import com.example.iber.model.Driver;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 // Allow us to configure the behavior of the database used during integration testing.
 // we config that we are going to test a h2 database
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-class DriverRepoTest {
+class DriverRepoIntegrationTest {
 
     @Autowired DriverRepo driverRepo;
 
