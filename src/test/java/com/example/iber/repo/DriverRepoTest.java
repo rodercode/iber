@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -124,8 +125,19 @@ class DriverRepoTest {
     requirements
         1. Should fetch driver by id
         2. Should return a driver object
-        3. Should not be null
+        3. Should not be an empty object
     */
 
+    @Test
+    public void Should_NotBeEmpty_When_FetchDriverByIdTwo(){
+        // Arrange
+        driverRepo.save(driverOne);
+        driverRepo.save(driverTwo);
 
+        // Act
+        Optional<Driver> fetchedDriver = driverRepo.findById(1L);
+
+        // Assert
+        assertThat(fetchedDriver).isNotEmpty();
+    }
 }
