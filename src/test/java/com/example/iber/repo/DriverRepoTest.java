@@ -129,7 +129,7 @@ class DriverRepoTest {
     */
 
     @Test
-    public void Should_NotBeEmpty_When_FetchDriverByIdTwo(){
+    public void Should_NotBeEmpty_When_FetchDriverByIdOne(){
         // Arrange
         driverRepo.save(driverOne);
         driverRepo.save(driverTwo);
@@ -139,5 +139,18 @@ class DriverRepoTest {
 
         // Assert
         assertThat(fetchedDriver).isNotEmpty();
+    }
+
+    @Test
+    public void Should_ReturnValueTesla_When_FetchDriverByIdOne(){
+        // Arrange
+        driverRepo.save(driverOne);
+        driverRepo.save(driverTwo);
+
+        // Act
+        Optional<Driver> fetchedDriver = driverRepo.findById(1L);
+
+        // Assert
+        fetchedDriver.ifPresent(driver -> assertThat(driver.getCar()).isEqualTo("Tesla"));
     }
 }
