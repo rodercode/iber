@@ -21,6 +21,10 @@ public class DriverService {
         return driverRepo.findById(id);
     }
 
+    public Driver createDriver(Driver driver){
+        return driverRepo.save(driver);
+    }
+
     public void removeDriverById(Long id){
         driverRepo.deleteById(id);
     }

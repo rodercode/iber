@@ -52,7 +52,9 @@ class DriverRepoTest {
 ///////////////////////////////////////////////////
 
     /*
-    method being tested: driverRepo.save()
+    class being tested: driverRepo
+    method being tested: save()
+
     requirements
         1. should be able to add driver to database
         2. return value should not be null
@@ -84,7 +86,9 @@ class DriverRepoTest {
 ///////////////////////////////////////////////////
 
     /*
-    method being tested: driverRepo.findAll()
+    class being tested: driverRepo
+    method being tested: findAll()
+
     requirements
         1. should be able to fetch all drivers from database
         2. driverList should have size of 2
@@ -124,7 +128,9 @@ class DriverRepoTest {
 ///////////////////////////////////////////////////
 
      /*
-    method being tested: driverRepo.findById()
+    class being tested: driverRepo
+    method being tested: findById
+
     requirements
         1. Should fetch driver by id
         2. Should return a driver object
@@ -164,8 +170,8 @@ class DriverRepoTest {
 ///////////////////////////////////////////////////
 
      /*
-    method being tested: driverRepo.findByCar()
-    Description: is custom query method that should find a driver by car model
+    class being tested: driverRepo
+    method being tested: findByCar
 
     requirements:
         1. Should fetch driver by car
@@ -206,8 +212,8 @@ class DriverRepoTest {
 ///////////////////////////////////////////////////
 
      /*
-    method being tested: driverRepo.delete
-    Description: a method that delete a driver by enter its ID
+    class being tested: driverRepo
+    method being tested: deleteById
 
     requirements:
         1. Should delete driver by id
@@ -229,10 +235,4 @@ class DriverRepoTest {
         // Assert
         assertThat(fetchedDriver).isEmpty();
     }
-
-
-
-
-
-
 }
